@@ -11,6 +11,7 @@
       <!-- remap from="odometry" to="msf_core/odometry" / -->
       <!-- Simulation -->
       <remap from="odometry" to="ground_truth/odometry" />
+      <remap from="path_segments" to="path_segments_4D" />
     </node>
 
     <node name="trajectory_sampler" pkg="mav_trajectory_generation_ros" type="trajectory_sampler_node" output="screen" />
