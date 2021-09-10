@@ -1,0 +1,41 @@
+# Example path with GPS co-ordinates
+
+# Format of coordinates ('gps'/'enu')
+coordinate_type: 'gps'
+
+# Method of sending commands to controller ('poses'/'polynomial' trajectory)
+path_mode: 'poses'
+
+# Limit distance between poses ('true'/'false')
+intermediate_poses: true
+# Maximum distance between poses [m]
+intermediate_pose_separation: 100
+
+# Maximum speed [m/s] and acceleration [m/s^2] for trajectories
+reference_speed: 2
+reference_acceleration: 1
+
+# Height for takeoff command [m]
+takeoff_height: 20
+# Height for landing command [m]
+landing_height: -0.5
+
+# Heading mode ('auto'/'manual'/'zero')
+# 'auto': faces in the direction of travel
+# 'manual': user-specified (below)
+# 'zero': heading is zero for entire trajectory
+heading_mode: 'auto'
+
+# Trajectory
+# x (ENU) [m] / longitude (GPS) [deg]
+easting: [-86.901328, -86.898718, -86.896403, -86.896311]
+# y (ENU) [m] / latitude (GPS) [deg]
+northing: [40.41343, 40.417351, 40.421836, 40.427645]
+# z (ENU) [m] / altitude (GPS) [m]
+height: [20, 20, 20, 20]
+# Heading [deg]
+heading: [0.0, 0.0, 0.0, 0.0]
+
+# Marker scale in Rviz
+scale_waypoint: 15
+scale_path: 2
