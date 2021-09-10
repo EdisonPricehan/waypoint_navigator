@@ -46,10 +46,10 @@
   </gazebo>
 
   <!-- Specify reference parameters for GNSS receiver. -->
-  <xacro:property name="referenceLatitude" value="47.4503488" />
-  <xacro:property name="referenceLongitude" value="8.6815056" />
-  <xacro:property name="referenceHeading" value="0" />
-  <xacro:property name="referenceAltitude" value="0" />  
+  <xacro:property name="referenceLatitude" value="40.41343" />
+  <xacro:property name="referenceLongitude" value="-86.901328" />
+  <xacro:property name="referenceHeading" value="90" />
+  <xacro:property name="referenceAltitude" value="0" />
 
   <!-- Mount a GNSS receiver. -->
   <gazebo>
