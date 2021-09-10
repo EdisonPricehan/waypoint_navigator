@@ -121,7 +121,9 @@ void WaypointNavigatorNode::loadParameters() {
       nh_private_.getParam("landing_height", landing_height_) &&
       nh_private_.getParam("mav_name", mav_name_) &&
       nh_private_.getParam("frame_id", frame_id_) &&
-      nh_private_.getParam("intermediate_poses", intermediate_poses_))
+      nh_private_.getParam("intermediate_poses", intermediate_poses_) &&
+      nh_private_.getParam("scale_waypoint", scale_waypoint_) &&
+      nh_private_.getParam("scale_path", scale_path_))
       << "Error loading parameters!";
 
   if (coordinate_type_ == "gps" || coordinate_type_ == "enu") {
@@ -194,6 +196,8 @@ bool WaypointNavigatorNode::loadPathFromFile() {
       geodetic_converter_.geodetic2Enu(
           northing[i], easting[i], (initial_altitude + height[i]),
           &cwp.position_W.x(), &cwp.position_W.y(), &cwp.position_W.z());
+      ROS_INFO("Waypoint %d: (Lon: %f, Lat: %f, Alt: %f) -> (East: %f, North: %f, Up: %f)", i,
+               easting[i], northing[i], initial_altitude + height[i], cwp.position_W.x(), cwp.position_W.y(), cwp.position_W.z());
     }
     // ENU path co-ordinates.
     else if (coordinate_type_ == "enu") {
@@ -670,9 +674,9 @@ void WaypointNavigatorNode::visualizationTimerCallback(const ros::TimerEvent&) {
   path_points_marker.pose.orientation.y = 0.0;
   path_points_marker.pose.orientation.z = 0.0;
   path_points_marker.pose.orientation.w = 1.0;
-  path_points_marker.scale.x = 0.1;
-  path_points_marker.scale.y = 0.1;
-  path_points_marker.scale.z = 0.1;
+  path_points_marker.scale.x = scale_waypoint_;
+  path_points_marker.scale.y = scale_waypoint_;
+  path_points_marker.scale.z = scale_waypoint_;
   path_points_marker.color.a = 1.0;
   path_points_marker.color.r = 1.0;
   path_points_marker.color.g = 0.0;
@@ -692,7 +696,7 @@ void WaypointNavigatorNode::visualizationTimerCallback(const ros::TimerEvent&) {
   path_marker.pose.orientation.y = 0.0;
   path_marker.pose.orientation.z = 0.0;
   path_marker.pose.orientation.w = 1.0;
-  path_marker.scale.x = 0.02;
+  path_marker.scale.x = scale_path_;
   path_marker.color.a = 1.0;
   path_marker.color.r = 1.0;
   path_marker.color.g = 1.0;

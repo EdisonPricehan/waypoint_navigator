@@ -209,6 +209,10 @@ class WaypointNavigatorNode {
 
   // Callback number for command_timer_.
   unsigned int timer_counter_;
+
+  // Scale of marker of path/points in Rviz
+  double scale_waypoint_;
+  double scale_path_;
 };
 }  // namespace: waypoint_navigator
 
