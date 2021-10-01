@@ -35,3 +35,7 @@ northing: [-3.0, -3.0, 0, 0]
 height: [1.0, 1.0, 1.0, 1.0]
 # Heading [deg]
 heading: [30.0, 80.0, 10.0, -30.0]
+
+# Marker scale in Rviz
+scale_waypoint: 15
+scale_path: 2
