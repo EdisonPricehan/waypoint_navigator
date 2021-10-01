@@ -6,20 +6,35 @@
   <arg name="enable_ground_truth" default="true"/>
   <arg name="log_file" default="$(arg mav_name)"/>
 
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find rotors_gazebo)/worlds/basic.world"/>
-    <!-- <arg name="debug" value="true" /> -->
-    <arg name="paused" value="false" />
-    <!-- <arg name="gui" value="false" /> -->
-  </include>
+  <!-- Initial MAV location and attitude-->
+  <arg name="x" default="0" />
+  <arg name="y" default="0" />
+  <arg name="z" default="0.1" />
+  <arg name="R" default="0" />
+  <arg name="P" default="0" />
+  <arg name="Y" default="0" />
+
+  <!-- Uncomment this to launch gazebo world if want to test the current launch file separately -->
+<!--  <include file="$(find gazebo_ros)/launch/empty_world.launch">-->
+<!--    <arg name="world_name" value="$(find rotors_gazebo)/worlds/basic.world"/>-->
+<!--    &lt;!&ndash; <arg name="debug" value="true" /> &ndash;&gt;-->
+<!--    <arg name="paused" value="false" />-->
+<!--    &lt;!&ndash; <arg name="gui" value="false" /> &ndash;&gt;-->
+<!--  </include>-->
 
   <group ns="$(arg mav_name)">
     <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
       <arg name="mav_name" value="$(arg mav_name)" />
-      <arg name="model" value="$(find waypoint_navigator)/descriptions/$(arg mav_name)_base_gps.xacro" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_with_vi_sensor.gazebo" />
       <arg name="enable_logging" value="$(arg enable_logging)" />
       <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
       <arg name="log_file" value="$(arg log_file)"/>
+      <arg name="x" value="$(arg x)"/>
+      <arg name="y" value="$(arg y)"/>
+      <arg name="z" value="$(arg z)"/>
+      <arg name="R" value="$(arg R)"/>
+      <arg name="P" value="$(arg P)"/>
+      <arg name="Y" value="$(arg Y)"/>
     </include>
 
     <!-- Start GPS converter -->
@@ -55,6 +70,11 @@
       <remap from="odometry" to="ground_truth/odometry" />
 <rosparam file="$(find mav_lowlevel_attitude_controller)/resources/PID_attitude_$(arg mav_name).yaml" />
     </node>
+
+    <include file="$(find waypoint_navigator)/launch/waypoint_navigator.launch" >
+      <arg name="namespace" value="$(arg mav_name)" />
+    </include>
+
   </group>
 
 </launch>
