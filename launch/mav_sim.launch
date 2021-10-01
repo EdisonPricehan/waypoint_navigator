@@ -71,10 +71,10 @@
 <rosparam file="$(find mav_lowlevel_attitude_controller)/resources/PID_attitude_$(arg mav_name).yaml" />
     </node>
 
-    <include file="$(find waypoint_navigator)/launch/waypoint_navigator.launch" >
-      <arg name="namespace" value="$(arg mav_name)" />
-    </include>
-
   </group>
+
+  <include file="$(find waypoint_navigator)/launch/waypoint_navigator.launch" >
+    <arg name="namespace" value="$(arg mav_name)" />
+  </include>
 
 </launch>
